@@ -1,0 +1,49 @@
+{
+  "model_name": "churn-classifier",
+  "version": 1,
+  "trained_at": "2026-10-12T12:46:12+00:00",
+  "algorithm": "HistGradientBoostingClassifier",
+  "features": [
+    "age",
+    "tenure_months",
+    "monthly_charges",
+    "total_charges",
+    "num_support_calls",
+    "avg_daily_usage_gb",
+    "contract_type",
+    "internet_service",
+    "payment_method"
+  ],
+  "target": "churn",
+  "decision_threshold": 0.5,
+  "params": {
+    "learning_rate": 0.06,
+    "max_iter": 250,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "random_state": 42
+  },
+  "metrics": {
+    "roc_auc": 0.8644,
+    "f1": 0.6744,
+    "precision": 0.7114,
+    "recall": 0.6411,
+    "accuracy": 0.8043,
+    "log_loss": 0.421,
+    "positive_rate": 0.3162
+  },
+  "mlflow_run_id": "b7d891a5b03e43859bf92d58a7b6a2ae",
+  "training_rows": 16000,
+  "data_source": "synthetic(drift=0.0)",
+  "promotion_reason": "initial training",
+  "history": [
+    {
+      "version": 1,
+      "trained_at": "2026-10-12T12:46:12+00:00",
+      "roc_auc": 0.8644,
+      "f1": 0.6744,
+      "reason": "initial training",
+      "mlflow_run_id": "b7d891a5b03e43859bf92d58a7b6a2ae"
+    }
+  ]
+}

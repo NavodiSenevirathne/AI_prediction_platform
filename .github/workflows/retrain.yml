@@ -1,0 +1,82 @@
+# Automated retraining: runs every day (and on demand). Checks data drift and
+# model performance, trains a challenger, and if it beats the production
+# model it is committed to models/ and deployed automatically via CD.
+name: Automated retraining
+
+on:
+  schedule:
+    - cron: "30 0 * * *" # every day 00:30 UTC (06:00 Sri Lanka time)
+  workflow_dispatch:
+    inputs:
+      drift:
+        description: "Simulated drift level 0-1 (empty = based on today's date)"
+        required: false
+        default: ""
+      force:
+        description: "Retrain even if no drift is detected"
+        type: boolean
+        default: false
+
+concurrency:
+  group: retraining
+  cancel-in-progress: false
+
+jobs:
+  retrain:
+    name: Drift check & retrain
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      promoted: ${{ steps.pipeline.outputs.promoted }}
+      new_version: ${{ steps.pipeline.outputs.new_version }}
+    env:
+      MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+      MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements/*.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements/train.txt
+
+      - name: Run retraining pipeline
+        id: pipeline
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.drift }}" ]; then ARGS="$ARGS --drift ${{ inputs.drift }}"; fi
+          if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          python -m src.pipelines.retrain $ARGS
+
+      - name: Upload pipeline report
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrain-report-${{ github.run_number }}
+          path: reports/
+
+      - name: Commit promoted model
+        if: steps.pipeline.outputs.promoted == 'true'
+        run: |
+          git config user.name "mlops-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add models/ reports/
+          git commit -m "model: promote v${{ steps.pipeline.outputs.new_version }} (automated retraining)"
+          git push
+
+  deploy:
+    name: Deploy new model
+    needs: retrain
+    if: needs.retrain.outputs.promoted == 'true'
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/cd.yml
+    with:
+      ref: main
+    secrets: inherit

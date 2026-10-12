@@ -1,0 +1,29 @@
+# Render Blueprint - creates both services from this repository.
+# Render dashboard -> New -> Blueprint -> select this repo.
+# Auto-deploy is OFF: deployments are triggered by the GitHub Actions CD
+# workflow (via deploy hooks) only after tests pass.
+services:
+  - type: web
+    name: churn-prediction-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: ADMIN_TOKEN
+        generateValue: true
+
+  - type: web
+    name: churn-monitoring-dashboard
+    runtime: docker
+    dockerfilePath: ./Dockerfile.dashboard
+    dockerContext: .
+    plan: free
+    region: singapore
+    autoDeployTrigger: "off"
+    envVars:
+      - key: API_URL
+        sync: false # paste the API URL, e.g. https://churn-prediction-api.onrender.com
