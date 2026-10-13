@@ -71,7 +71,7 @@ This platform watches for that change, and when it happens, it **retrains, tests
 
 ## 🧱 Architecture
 
-![Architecture](‎docs/Untitled Diagram.drawio.png)
+![Architecture](docs/Untitled%20Diagram.drawio.png)
 
 | Layer | What lives there |
 |:---|:---|
