@@ -1,19 +1,19 @@
 {
-  "run_at": "2026-10-12T17:09:28+00:00",
+  "run_at": "2026-10-13T04:38:33+00:00",
   "data_source": "synthetic(drift=0.8)",
   "simulated_drift": 0.8,
   "new_rows": 8000,
   "champion_version": 1,
   "champion_metrics_new_data": {
-    "roc_auc": 0.8345,
-    "f1": 0.8448,
-    "precision": 0.8674,
-    "recall": 0.8235,
-    "accuracy": 0.7808,
-    "log_loss": 0.4804,
-    "positive_rate": 0.7246
+    "roc_auc": 0.8538,
+    "f1": 0.8453,
+    "precision": 0.8767,
+    "recall": 0.816,
+    "accuracy": 0.7842,
+    "log_loss": 0.4622,
+    "positive_rate": 0.7225
   },
-  "champion_auc_drop": 0.0299,
+  "champion_auc_drop": 0.0106,
   "drift": {
     "dataset_drift": true,
     "share_drifted_features": 0.3333,
@@ -26,75 +26,75 @@
     "features": {
       "age": {
         "type": "numeric",
-        "psi": 0.1624,
+        "psi": 0.1528,
         "test": "ks",
         "p_value": 0.0,
         "reference_mean": 42.096,
-        "current_mean": 37.4505,
+        "current_mean": 37.5883,
         "drifted": false
       },
       "tenure_months": {
         "type": "numeric",
-        "psi": 0.138,
+        "psi": 0.1439,
         "test": "ks",
         "p_value": 0.0,
         "reference_mean": 27.1587,
-        "current_mean": 19.9179,
+        "current_mean": 19.7132,
         "drifted": false
       },
       "monthly_charges": {
         "type": "numeric",
-        "psi": 1.0293,
+        "psi": 1.0135,
         "test": "ks",
         "p_value": 0.0,
         "reference_mean": 52.867,
-        "current_mean": 69.2654,
+        "current_mean": 68.9303,
         "drifted": true
       },
       "total_charges": {
         "type": "numeric",
-        "psi": 0.0074,
+        "psi": 0.01,
         "test": "ks",
-        "p_value": 0.009565,
+        "p_value": 0.000473,
         "reference_mean": 1450.0372,
-        "current_mean": 1375.1765,
+        "current_mean": 1355.396,
         "drifted": false
       },
       "num_support_calls": {
         "type": "numeric",
-        "psi": 1.1686,
+        "psi": 1.1138,
         "test": "ks",
         "p_value": 0.0,
         "reference_mean": 1.2027,
-        "current_mean": 2.8236,
+        "current_mean": 2.7895,
         "drifted": true
       },
       "avg_daily_usage_gb": {
         "type": "numeric",
-        "psi": 0.6506,
+        "psi": 0.5992,
         "test": "ks",
         "p_value": 0.0,
         "reference_mean": 2.9303,
-        "current_mean": 5.5323,
+        "current_mean": 5.3713,
         "drifted": true
       },
       "contract_type": {
         "type": "categorical",
-        "psi": 0.1988,
+        "psi": 0.1866,
         "test": "chi2",
         "p_value": 0.0,
         "drifted": false
       },
       "internet_service": {
         "type": "categorical",
-        "psi": 0.0925,
+        "psi": 0.0887,
         "test": "chi2",
         "p_value": 0.0,
         "drifted": false
       },
       "payment_method": {
         "type": "categorical",
-        "psi": 0.0257,
+        "psi": 0.0268,
         "test": "chi2",
         "p_value": 0.0,
         "drifted": false
@@ -106,16 +106,16 @@
     "data drift"
   ],
   "challenger_metrics": {
-    "roc_auc": 0.8473,
-    "f1": 0.8742,
-    "precision": 0.8489,
-    "recall": 0.9011,
-    "accuracy": 0.8121,
-    "log_loss": 0.4226,
-    "positive_rate": 0.7246
+    "roc_auc": 0.8669,
+    "f1": 0.878,
+    "precision": 0.8543,
+    "recall": 0.9031,
+    "accuracy": 0.8187,
+    "log_loss": 0.3972,
+    "positive_rate": 0.7225
   },
   "promoted": true,
   "new_version": 2,
-  "mlflow_run_id": "eb06d9ddacd546338cc004bb4bb45ffa",
+  "mlflow_run_id": "837cbb2cec0041398f2775f7b37d591b",
   "decision": "challenger promoted to v2"
 }
