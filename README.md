@@ -9,7 +9,7 @@
 [![CD](https://github.com/NavodiSenevirathne/AI_prediction_platform/actions/workflows/cd.yml/badge.svg)](https://github.com/NavodiSenevirathne/AI_prediction_platform/actions/workflows/cd.yml)
 [![Automated retraining](https://github.com/NavodiSenevirathne/AI_prediction_platform/actions/workflows/retrain.yml/badge.svg)](https://github.com/NavodiSenevirathne/AI_prediction_platform/actions/workflows/retrain.yml)
 
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.143-009688?logo=fastapi&logoColor=white)
 ![scikit--learn](https://img.shields.io/badge/scikit--learn-1.9-F7931E?logo=scikitlearn&logoColor=white)
 ![MLflow](https://img.shields.io/badge/MLflow-3.17-0194E2?logo=mlflow&logoColor=white)
